@@ -1,45 +1,59 @@
 <?php
 class Participant
 {
+    private int $id;
     private string $firstName;
     private string $lastName;
     private string $email;
 
-    public static function getFirstName()
-    {
-        return self::$firstName;
+
+    public function getID() {
+        return $this->id;
     }
 
-    public static function setFirstName($new)
-    {
-        self::$firstName = $new;
-    }
-
-
-    public static function getLastName()
-    {
-        return self::$lastName;
-    }
-
-    public static function setLasttName($new)
-    {
-        self::$lastName = $new;
+    public function setID($new){
+        if ($this->id == 0) {
+            $this->id = $new;
+        }
     }
 
 
-    public static function getEmail()
+    public function getFirstName()
     {
-        return self::$email;
+        return $this->firstName;
     }
 
-    public static function setEmail($new)
+    public function setFirstName($new)
     {
-        self::$email = $new;
+        $this->firstName = $new;
+    }
+
+
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    public function setLasttName($new)
+    {
+        $this->lastName = $new;
+    }
+
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($new)
+    {
+        $this->email = $new;
     }
 
 
     public function __construct(string $firstName, string $lastName, string $email)
     {
+        $this->id = 0;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
@@ -49,6 +63,7 @@ class Participant
 
 class Event
 {
+    private int $id;
     private string $title;
     private string $description;
     private string $address;
@@ -58,15 +73,26 @@ class Event
 
     public function addParticipant($Participant)
     {
-        array_push(self::$participants, $Participant);
+        array_push($this->participants, $Participant);
     }
 
     public function removeParticipant($Participant)
     {
-        $index = array_search($Participant, self::$participants);
-        array_splice(self::$participants, $index, 1);
+        $index = array_search($Participant, $this->participants);
+        array_splice($this->participants, $index, 1);
     }
 
+
+
+    public function getID() {
+        return $this->id;
+    }
+
+    public function setID($new){
+        if ($this->id == 0) {
+            $this->id = $new;
+        }
+    }
 
 
     public function getTitle()
@@ -74,9 +100,9 @@ class Event
         return $this->title;
     }
 
-    public static function setTitle($new)
+    public function setTitle($new)
     {
-        self::$title = $new;
+        $this->title = $new;
     }
 
 
@@ -85,9 +111,9 @@ class Event
         return $this->description;
     }
 
-    public static function setDescription($new)
+    public function setDescription($new)
     {
-        self::$description = $new;
+        $this->description = $new;
     }
 
 
@@ -96,9 +122,9 @@ class Event
         return $this->address;
     }
 
-    public static function setAddress($new)
+    public function setAddress($new)
     {
-        self::$address = $new;
+        $this->address = $new;
     }
 
 
@@ -107,9 +133,10 @@ class Event
         return $this->startTime;
     }
 
-    public static function setStartTime($new)
+    public function setStartTime($new)
     {
-        self::$startTime = $new;
+        $timeZone = new DateTimeZone("Europe/Helsinki");
+        $this->startTime = new DateTime($new, $timeZone);
     }
 
 
@@ -118,23 +145,23 @@ class Event
         return $this->endTime;
     }
 
-    public static function setEndTime($new)
+    public function setEndTime($new)
     {
-        self::$endTime = $new;
+        $timeZone = new DateTimeZone("Europe/Helsinki");
+        $this->endTime = new DateTime($new, $timeZone);
     }
 
 
 
-    public function __construct(string $title, string $description, string $address, int $startTimestamp, int $endTimestamp, array $participants)
+    public function __construct(string $title, string $description, string $address, string $startTimestamp, string $endTimestamp, array $participants)
     {
-        
-        $object1 = new DateTime();
-        $object2 = new DateTime();
+        $timeZone = new DateTimeZone("Europe/Helsinki");
+        $this->id = 0;
         $this->title = $title;
         $this->description = $description;
         $this->address = $address;
-        $this->startTime = date_timestamp_set($object1, $startTimestamp);
-        $this->endTime = date_timestamp_set($object2, $endTimestamp);
+        $this->startTime = new DateTime($startTimestamp, $timeZone);
+        $this->endTime = new DateTime($endTimestamp, $timeZone);
         $this->participants = $participants;
     }
 }
