@@ -148,6 +148,75 @@ class DataAccess {
             die("VIRHE: " . $e->getMessage()); 
         }
     }
+
+    public function addUser($user) {
+        try {
+            $query = $this->connection->prepare(
+                "INSERT INTO kayttajat (nimi, email, salasana, admin) VALUES (:nm, :em, :ss, :ad)"
+            );
+            $query->execute(array(
+                ":nm" => $user->getNimi(),
+                ":em" => $user->getEmail(),
+                ":ss" => $user->getSalasana(),
+                ":ad" => $user->getAdmin()
+            ));
+        }
+        catch (PDOException $e) { 
+            die("VIRHE: " . $e->getMessage()); 
+        }
+    }
+
+    public function getUsers() {
+        $users = [];
+        try {
+            $query = $this->connection->prepare(
+                "SELECT * FROM kayttajat"
+            );
+            $query->execute();
+        } 
+        catch (PDOException $e) {
+            die("VIRHE: " . $e->getMessage());
+        }
+        $result = $query->fetchAll();
+        foreach($result as $i){
+            $user = new User($i[1], $i[2], $i[3], $i[4]);
+            $user->setID($i[0]);
+            array_push($users, $user);
+        }
+        return $users;
+    }
+
+    public function updateUser($user) {
+        try {
+            $query = $this->connection->prepare(
+                "UPDATE kayttajat SET nimi = :nm, email = :em, salasana = :ss, admin = :ad WHERE id=:id"
+            );
+            $query->execute(array(
+                ":nm" => $user->getNimi(),
+                ":em" => $user->getEmail(),
+                ":ss" => $user->getSalasana(),
+                ":ad" => $user->getAdmin(),
+                ":id" => $user->getId()
+            ));
+        }
+        catch (PDOException $e) { 
+            die("VIRHE: " . $e->getMessage()); 
+        }
+    }
+
+    public function deleteUser($user) {
+        try {
+            $query = $this->connection->prepare(
+                "DELETE FROM kayttajat WHERE id=:id"
+            );
+            $query->execute(array(
+                ":id" => $user->getID()
+            ));
+        }
+        catch (PDOException $e) { 
+            die("VIRHE: " . $e->getMessage()); 
+        }
+    }
 }
 
 ?>

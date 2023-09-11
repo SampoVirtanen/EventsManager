@@ -165,4 +165,76 @@ class Event
         $this->participants = $participants;
     }
 }
+
+Class User{
+    private int $id;
+    private string $nimi;
+    private string $email;
+    private string $salasana;
+    private bool $admin;
+
+    public function getID() {
+        return $this->id;
+    }
+
+    public function setID($new){
+        if ($this->id == 0) {
+            $this->id = $new;
+        }
+    }
+
+
+    public function getNimi()
+    {
+        return $this->nimi;
+    }
+
+    public function setNimi($new)
+    {
+        $this->nimi = $new;
+    }
+
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($new)
+    {
+        $this->email = $new;
+    }
+
+
+    public function getSalasana()
+    {
+        return $this->salasana;
+    }
+
+    public function setSalasana($new)
+    {
+        $this->salasana = $new;
+    }
+
+
+    public function getAdmin()
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin($new)
+    {
+        $this->admin = $new;
+    }
+
+
+    public function __construct(string $nimi, string $email, string $salasana, bool $admin)
+    {
+        $this->id = 0;
+        $this->nimi = $nimi;
+        $this->email = $email;
+        $this->salasana = $salasana;
+        $this->admin = $admin;
+    }
+}
 ?>
