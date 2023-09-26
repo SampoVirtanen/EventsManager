@@ -189,13 +189,26 @@ class DataAccess {
     public function updateUser($user) {
         try {
             $query = $this->connection->prepare(
-                "UPDATE kayttajat SET nimi = :nm, email = :em, salasana = :ss, admin = :ad WHERE id=:id"
+                "UPDATE kayttajat SET nimi = :nm, email = :em, admin = :ad WHERE id=:id"
             );
             $query->execute(array(
                 ":nm" => $user->getNimi(),
                 ":em" => $user->getEmail(),
-                ":ss" => $user->getSalasana(),
                 ":ad" => $user->getAdmin(),
+                ":id" => $user->getId()
+            ));
+        }
+        catch (PDOException $e) { 
+            die("VIRHE: " . $e->getMessage()); 
+        }
+    }
+    public function updatePassword($user) {
+        try {
+            $query = $this->connection->prepare(
+                "UPDATE kayttajat SET salasana = :ss WHERE id=:id"
+            );
+            $query->execute(array(
+                ":ss" => $user->getSalasana(),
                 ":id" => $user->getId()
             ));
         }
