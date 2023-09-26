@@ -10,7 +10,6 @@ if (! empty($_POST["login"])) {
         ":em" => $_POST["email"]
     ));
     $result = $query->fetch();
-    echo '<pre>'; print_r($result); echo '</pre>';
     $loginPassword = 0;
     if (! empty($result)) {
         $inputPassword = $_POST["password"];
