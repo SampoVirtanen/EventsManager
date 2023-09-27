@@ -128,6 +128,7 @@ img {
     border-radius: 10px;
     padding: 10px 20px 10px 20px;
 }
+
 .tapahtuma {
     border: 2px solid #696969;
     border-radius: 10px;
@@ -135,6 +136,7 @@ img {
     margin: 20px auto;
     padding: 10px;
 }
+
 .tapahtuma button {
     border-radius: 10px;
     padding: 5px;
@@ -182,10 +184,13 @@ table > tbody:not(:last-child),
 table > tfoot:not(:last-child) {
     border-bottom: 1px solid #696969;
 }
-th.min{
+
+th.min {
     text-align: center;
 }
-td, th {
+
+td,
+th {
     width: 1%;
     white-space: nowrap;
 }
@@ -206,10 +211,12 @@ table .form.open {
 div.form.open {
     display: block;
 }
+
 body > #avaalisays {
     float: right;
     margin: 10px;
 }
+
 #lisaa #avaalisays {
     float: right;
 }
@@ -236,18 +243,21 @@ body > #avaalisays {
     display: block;
 }
 
-.header h1, .header h2, .header h3 {
+.header h1,
+.header h2,
+.header h3 {
     display: inline-block;
 }
 
 .footer form {
-    
     display: inline-block;
 }
 
-.startendtime div, .startendtime h1{
+.startendtime div,
+.startendtime h1 {
     display: inline-block;
 }
+
 
 @media all and (max-width: 780px) {
     .container {
@@ -262,7 +272,6 @@ body > #avaalisays {
         width: auto;
     }
     input,
-    textarea,
     select {
         width: 100%;
     }

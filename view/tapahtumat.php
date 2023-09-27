@@ -56,10 +56,10 @@ $tulos = $query->fetchAll();
 		<form action="crud/addEvent.php" method="post">
 			<div class="header">
 				<label for="title">Title:</label><br>
-				<input type="text" id="title" name="title" placeholder="Enter title"><br>
+				<input type="text" id="title" name="title" size="100%" placeholder="Enter title"><br>
 			</div>
 			<label for="desc">Description:</label><br>
-			<input type="textarea" id="desc" name="desc" placeholder="Enter description"><br>
+			<textarea id="desc" name="desc" cols="50" rows="5" placeholder="Enter description"></textarea><br>
 
 			<div class="startendtime">
 				<div class="starttime">
@@ -109,10 +109,10 @@ $tulos = $query->fetchAll();
 						<h3 class="id"><?php echo $rivi["id"] ?></h3>
 						<input type="hidden" id="id" name="id" value="<?php echo $rivi["id"] ?>">
 						<label for="title">Title:</label><br>
-						<input type="text" id="title" name="title" value="<?php echo $rivi["title"] ?>"><br>
+						<input type="text" id="title" name="title" size="100%" value="<?php echo $rivi["title"] ?>"><br>
 					</div>
 					<label for="desc">Description:</label><br>
-					<input type="textarea" id="desc" name="desc" value="<?php echo $rivi["description"] ?>"><br>
+					<textarea id="desc" name="desc" cols="50" rows="5" ><?php echo $rivi["description"] ?></textarea><br>
 
 					<div class="startendtime">
 						<div class="starttime">
