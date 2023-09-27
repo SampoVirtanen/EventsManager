@@ -140,6 +140,14 @@ img {
     padding: 5px;
 }
 
+.tapahtuma .form {
+    border: 1px solid #696969;
+    border-radius: 10px;
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+}
+
 th,
 td {
     margin: auto;
@@ -191,8 +199,12 @@ td, th {
     background-color: #eeeeee;
 }
 
-.form.open {
+table .form.open {
     display: table-row;
+}
+
+div.form.open {
+    display: block;
 }
 body > #avaalisays {
     float: right;
@@ -222,6 +234,19 @@ body > #avaalisays {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.header h1, .header h2, .header h3 {
+    display: inline-block;
+}
+
+.footer form {
+    
+    display: inline-block;
+}
+
+.startendtime div, .startendtime h1{
+    display: inline-block;
 }
 
 @media all and (max-width: 780px) {

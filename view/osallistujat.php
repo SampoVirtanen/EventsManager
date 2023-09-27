@@ -63,6 +63,17 @@ $tulos = $query->fetchAll();
 				<button id="avaalisays" class="btn btn-primary btn-success" onclick="avaaMuokkaus(0)"><i class="fa-solid fa-plus"></i></button>
 			</th>
 		</tr>
+		<tr class="form" id="0">
+			<form action="crud/addParticipant.php" method="post">
+				<td><input type="hidden" id="id" name="id" value=""></td>
+				<td><input type="text" id="fname" name="fname" placeholder="Enter first name"></td>
+				<td><input type="text" id="lname" name="lname" placeholder="Enter last name"></td>
+				<td><input type="text" id="email" name="email" placeholder="Enter email"></td>
+				<td class="min">
+					<button type="submit" name="valmis" class="full-width btn btn-primary btn-success">Valmis</button>
+				</td>
+			</form>
+		</tr>
 
 		<?php
 		foreach ($tulos as $rivi) {
@@ -97,17 +108,6 @@ $tulos = $query->fetchAll();
 		<?php
 		}
 		?>
-		<tr class="form" id="0">
-			<form action="crud/addParticipant.php" method="post">
-				<td><input type="hidden" id="id" name="id" value=""></td>
-				<td><input type="text" id="fname" name="fname" placeholder="Enter first name"></td>
-				<td><input type="text" id="lname" name="lname" placeholder="Enter last name"></td>
-				<td><input type="text" id="email" name="email" placeholder="Enter email"></td>
-				<td class="min">
-					<button type="submit" name="valmis" class="full-width btn btn-primary btn-success">Valmis</button>
-				</td>
-			</form>
-		</tr>
 
 	</table>
 </div>
