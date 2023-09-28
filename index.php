@@ -15,6 +15,12 @@
     include "connection.php";
     session_start();
     if (!empty($_SESSION["userId"])) {
+
+        // Sama kuin kaikki muut mysql lauset, on parempi laittaa tämä dataaccessiin.
+        // Katso tehtävä https://taito.edu.turku.fi/mod/page/view.php?id=197980
+        // Lue ennemän Separation of Concerns https://en.wikipedia.org/wiki/Separation_of_concerns
+        // Voit löytää lisää materiali, ja voin selitä lisää ensi viikko.
+        
         $query = $connection->prepare(
             "SELECT * FROM kayttajat WHERE id = :id"
         );
