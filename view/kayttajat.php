@@ -130,7 +130,7 @@ if ($result["admin"] == 1) {
 						?>
 					</td>
 					<td class="min">
-						<button type="submit" name="valmis" class="full-width btn btn-primary btn-success">Valmis</button>
+						<button type="submit" name="valmis" class="full-width btn btn-primary btn-success"><i class="fa-solid fa-floppy-disk"></i></button>
 					</td>
 				</form>
 			</tr>

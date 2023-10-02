@@ -150,6 +150,10 @@ img {
     padding: 10px;
 }
 
+.tapahtuma table {
+    width: 100%;
+}
+
 th,
 td {
     margin: auto;

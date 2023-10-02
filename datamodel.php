@@ -151,6 +151,11 @@ class Event
         $this->endTime = new DateTime($new, $timeZone);
     }
 
+    public function getParticipants()
+    {
+        return $this->participants;
+    }
+
 
 
     public function __construct(string $title, string $description, string $address, string $startTimestamp, string $endTimestamp, array $participants)

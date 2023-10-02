@@ -7,6 +7,7 @@ function avaaLisays() {
         document.getElementById("lista").style.display = "none";
     }
 }
+
 function avaaMuokkaus(id) {
     var elements = document.querySelectorAll(".form.open");
     [].forEach.call(elements, function (element) {
@@ -19,4 +20,8 @@ function avaaMuokkaus(id) {
     } else {
         document.getElementById(id).classList.add("open");
     }
+}
+
+function avaaEvents(id) {
+    
 }
