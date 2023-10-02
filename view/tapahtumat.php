@@ -1,16 +1,7 @@
 <?php
 if (!empty($_SESSION["userId"])) {
 	include "connection.php";
-	include "dataaccess.php";
-	$dataAccess = new DataAccess($connection);
-
-	$query = $connection->prepare(
-		"SELECT * FROM kayttajat WHERE id = :id"
-	);
-	$query->execute(array(
-		":id" => $_SESSION["userId"]
-	));
-	$result = $query->fetch();
+	$result = $dataAccess->getUser($_SESSION["userId"]);
 	$displayName = $result["nimi"];
 }
 $events = $dataAccess->getEvents();
