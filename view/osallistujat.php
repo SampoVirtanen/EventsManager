@@ -70,7 +70,7 @@ $tulos = $query->fetchAll();
 				<td><input type="text" id="lname" name="lname" placeholder="Enter last name"></td>
 				<td><input type="text" id="email" name="email" placeholder="Enter email"></td>
 				<td class="min">
-					<button type="submit" name="valmis" class="full-width btn btn-primary btn-success">Valmis</button>
+					<button type="submit" name="valmis" class="full-width btn btn-primary btn-success"><i class="fa-solid fa-floppy-disk"></i></button>
 				</td>
 			</form>
 		</tr>
@@ -101,7 +101,7 @@ $tulos = $query->fetchAll();
 					<td><input type="text" id="lname" name="lname" value="<?php echo $rivi["last_name"] ?>"></td>
 					<td><input type="text" id="email" name="email" value="<?php echo $rivi["email"] ?>"></td>
 					<td class="min">
-						<button type="submit" name="valmis" class="full-width btn btn-primary btn-success">Valmis</button>
+						<button type="submit" name="valmis" class="full-width btn btn-primary btn-success"><i class="fa-solid fa-floppy-disk"></i></button>
 					</td>
 				</form>
 			</tr>
