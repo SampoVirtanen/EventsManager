@@ -1,21 +1,10 @@
 <?php
 if (!empty($_SESSION["userId"])) {
 	include "connection.php";
-
-	$query = $connection->prepare(
-		"SELECT * FROM kayttajat WHERE id = :id"
-	);
-	$query->execute(array(
-		":id" => $_SESSION["userId"]
-	));
-	$result = $query->fetch();
+	$result = $dataAccess->getUser($_SESSION["userId"]);
 	$displayName = $result["nimi"];
 }
-$query = $connection->prepare(
-	"SELECT * FROM kayttajat"
-);
-$query->execute();
-$tulos = $query->fetchAll();
+$users = $dataAccess->getUsers();
 if ($result["admin"] == 1) {
 ?>
 	<nav class="navbar navbar-expand-sm bg-success navbar-dark">
@@ -45,11 +34,6 @@ if ($result["admin"] == 1) {
 			</div>
 		</ul>
 	</nav>
-<?php
-} else {
-	require_once __DIR__ . "/view/tapahtumat.php";
-}
-?>
 
 
 
@@ -63,7 +47,7 @@ if ($result["admin"] == 1) {
 		<label for="email">Email:</label><br>
 		<input type="text" id="email" name="email" placeholder="Enter email"><br>
 		<label for="slsn">Salasana:</label><br>
-		<input type="password" id="slsn" name="slsn" placeholder="Enter last name"><br>
+		<input type="password" id="slsn" name="slsn" placeholder="Enter password"><br>
 		<label for="admin">Admin:</label><br>
 		<input type="radio" id="true" name="admin" value="1">
 		<label for="true">Kyllä</label>
@@ -84,36 +68,38 @@ if ($result["admin"] == 1) {
 			</th>
 		</tr>
 		<?php
-		foreach ($tulos as $rivi) {
-			if ($rivi["admin"] == 0) {
+		foreach ($users as $user) {
+			if ($user->getAdmin() == false) {
 				$rooli = "Käyttäjä";
+				$admin = 0;
 			} else {
 				$rooli = "Admin";
+				$admin = 1;
 			}
 		?>
 			<tr>
-				<td><?php echo $rivi["id"] ?></td>
-				<td><?php echo $rivi["nimi"] ?></td>
-				<td><?php echo $rivi["email"] ?></td>
+				<td><?php echo $user->getId() ?></td>
+				<td><?php echo $user->getNimi() ?></td>
+				<td><?php echo $user->getEmail() ?></td>
 				<td><?php echo $rooli ?></td>
 				<td class="min">
 					<form action="crud/deleteUser.php" method="post">
-						<input type="hidden" id="id" name="id" value="<?php echo $rivi["id"] ?>">
-						<input type="hidden" id="name" name="name" value="<?php echo $rivi["nimi"] ?>">
-						<input type="hidden" id="email" name="email" value="<?php echo $rivi["email"] ?>">
-						<input type="hidden" id="admin" name="admin" value="<?php echo $rivi["admin"] ?>">
+						<input type="hidden" id="id" name="id" value="<?php echo $user->getId() ?>">
+						<input type="hidden" id="name" name="name" value="<?php echo $user->getNimi() ?>">
+						<input type="hidden" id="email" name="email" value="<?php echo $user->getEmail() ?>">
+						<input type="hidden" id="admin" name="admin" value="<?php echo $admin ?>">
 						<button type="submit" name="valmis" class="delete btn btn-primary btn-danger my-2 my-sm-0"><i class="fa-solid fa-trash-can"></i></button>
 					</form>
-					<button class="edit btn btn-warning my-2 my-sm-0" onclick="<?php echo "avaaMuokkaus(" . $rivi["id"] . ")" ?>"><i class="fa-solid fa-pen-to-square"></i></button>
+					<button class="edit btn btn-warning my-2 my-sm-0" onclick="<?php echo "avaaMuokkaus(" . $user->getId() . ")" ?>"><i class="fa-solid fa-pen-to-square"></i></button>
 				</td>
 			</tr>
-			<tr class="form" id="<?php echo $rivi["id"] ?>">
+			<tr class="form" id="<?php echo $user->getId() ?>">
 				<form action="crud/updateUser.php" method="post">
-					<td><?php echo $rivi["id"] ?><input type="hidden" id="id" name="id" value="<?php echo $rivi["id"] ?>"></td>
-					<td><input type="text" id="name" name="name" value="<?php echo $rivi["nimi"] ?>"></td>
-					<td><input type="text" id="email" name="email" value="<?php echo $rivi["email"] ?>"></td>
+					<td><?php echo $user->getId() ?><input type="hidden" id="id" name="id" value="<?php echo $user->getId() ?>"></td>
+					<td><input type="text" id="name" name="name" value="<?php echo $user->getNimi() ?>"></td>
+					<td><input type="text" id="email" name="email" value="<?php echo $user->getEmail() ?>"></td>
 					<td>
-						<?php if ($rivi["admin"] == 1) {
+						<?php if ($admin == 1) {
 						?>
 							<input type="radio" id="true" name="admin" value="1" checked="">
 							<label for="true">Admin</label>
@@ -140,3 +126,8 @@ if ($result["admin"] == 1) {
 
 	</table>
 </div>
+<?php
+} else {
+	require_once __DIR__ . "/view/tapahtumat.php";
+}
+?>

@@ -263,6 +263,23 @@ class DataAccess
         return $users;
     }
 
+    public function getUser($id)
+    {
+        try {
+
+            $query = $this->connection->prepare(
+                "SELECT * FROM kayttajat WHERE id = :id"
+            );
+            $query->execute(array(
+                ":id" => $id
+            ));
+        } catch (PDOException $e) {
+            die("VIRHE: " . $e->getMessage());
+        }
+        $result = $query->fetch();
+        return $result;
+    }
+
     public function updateUser($user)
     {
         try {

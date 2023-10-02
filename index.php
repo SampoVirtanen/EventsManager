@@ -13,15 +13,11 @@
 <body>
     <?php
     include "connection.php";
+	include "dataaccess.php";
+	$dataAccess = new DataAccess($connection);
     session_start();
     if (!empty($_SESSION["userId"])) {
-        $query = $connection->prepare(
-            "SELECT * FROM kayttajat WHERE id = :id"
-        );
-        $query->execute(array(
-            ":id" => $_SESSION["userId"]
-        ));
-        $result = $query->fetch();
+        $result = $dataAccess->getUser($_SESSION["userId"]);
         $displayName = $result["nimi"];
         if ($result["admin"] == 1) {
             if (isset($_GET["tapahtumat"])) {
